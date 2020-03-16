@@ -37,25 +37,36 @@ resource "aws_security_group" "harvestMoon" {
         create_before_destroy=true
 
     }
-}
-resource "aws_security_group_rule" "allow_all_ssh" {
-    type                ="ingress"
-    from_port           = 22
-    to_port             = 22
-    protocol            ="tcp"
-    cidr_blocks         =["0.0.0.0/0"]
-    security_group_id   ="${aws_security_group.harvestMoon.id}"
-  
-}
-
-resource "aws_security_group_rule" "allow_all_outbound" {
-    type                    ="egress"
-    from_port               =0
-    to_port                 = 0
-    protocol                ="-1"
-    cidr_blocks             =["0.0.0.0/0"]
-    security_group_id       ="${aws_security_group.harvestMoon.id}"
-
+  ingress {
+    protocol    = "tcp"
+    from_port   = 80
+    to_port     = 80
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    protocol    = "tcp"
+    from_port   = 443
+    to_port     = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    protocol    = "tcp"
+    from_port   = 22
+    to_port     = 22
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    protocol    = "tcp"
+    from_port   = 2073
+    to_port     = 2073
+    cidr_blocks = ["202.70.67.113/32","182.93.83.51/32","202.166.206.8/32","202.79.34.78/32"]
+  }
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 

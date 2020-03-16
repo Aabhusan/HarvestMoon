@@ -8,7 +8,7 @@ variable "instance_key" {
 }
 
 variable "aws_ami" {  
-  default= "ami-02cbed67225579b2c"
+  default= "ami-06d51e91cea0dac8d"
 }
 
 variable "instance_type" {
